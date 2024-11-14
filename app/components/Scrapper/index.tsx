@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import {useProgress} from '../../../hooks/loading-hook'
 import { Button } from "@/components/ui/button"
-import * as XLSX from 'xlsx'; // For generating the Excel file
+import * as XLSX from 'xlsx';
 import { Loader2 } from 'lucide-react';
 import { Progress } from "@/components/ui/progress"
 import { Input } from "@/components/ui/input"
