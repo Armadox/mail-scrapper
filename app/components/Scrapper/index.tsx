@@ -167,6 +167,15 @@ export default function Home() {
                 </AlertDescription>
             </Alert>
             }
+            {process.env.NODE_ENV === 'production' &&
+            <Alert variant="destructive" className='my-9 border-red-800 text-red-800'>
+                <AlertCircle className="h-4 w-4" />
+                <AlertTitle>This will only work localy.</AlertTitle>
+                <AlertDescription>
+                    Headless browser operations are blocked on cloud hosting platforms.
+                </AlertDescription>
+            </Alert>
+            }
             {websiteCount > 0 && (
                 <Progress className='max-w-[400px]' value={(mailCount / websiteCount) * 100} />
             )}
