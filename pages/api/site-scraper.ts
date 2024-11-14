@@ -1,6 +1,5 @@
 import puppeteer from 'puppeteer-extra';
 import StealthPlugin from 'puppeteer-extra-plugin-stealth';
-import chrome from 'chrome-aws-lambda';
 import { Browser } from "puppeteer";
 import { NextApiRequest, NextApiResponse } from 'next';
 
@@ -15,11 +14,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     try {
-        const browser: Browser = await puppeteer.launch({
-            headless: true,
-            args: [...chrome.args, '--no-sandbox', '--disable-setuid-sandbox'],
-            executablePath: await chrome.executablePath,
-        });
+        const browser: Browser = await puppeteer.launch({ headless: true });
         const page = await browser.newPage();
         await page.goto(url, { waitUntil: 'domcontentloaded' });
         await page.waitForSelector('body');
@@ -34,7 +29,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             const emailList: string[] = [];
 
             for (const term of example) {
-                const matchingLink = links.find(link => link.toLowerCase().includes(term));
+                const matchingLink = links.find(link => link.toLowerCase().includes(term) && !link.startsWith('mailto:'));
                 
                 if (matchingLink) {
                     try {

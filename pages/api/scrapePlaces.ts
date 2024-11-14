@@ -42,7 +42,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     try {
         const placesData = await fetchAllPlaces(url);
         const places = await Promise.all(
-            placesData.map(async (place: Place) => {
+            placesData.map(async (place) => {
                 const detailsUrl = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${place.place_id}&key=${apiKey}`;
                 const details = await axios.get(detailsUrl);
                 return {
